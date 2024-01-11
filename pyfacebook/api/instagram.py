@@ -326,12 +326,22 @@ class IgProApi(BaseApi):
         next_cursor = None
 
         while True:
-            next_cursor, previous_cursor, data = self.paged_by_cursor(
-                target=user_id,
-                resource='media',
-                args=args,
-                next_cursor=next_cursor
-            )
+            try:
+                next_cursor, previous_cursor, data = self.paged_by_cursor(
+                    target=user_id,
+                    resource='media',
+                    args=args,
+                    next_cursor=next_cursor
+                )
+            except Exception as ex:
+                # The media was posted before the most recent time that the user's account was converted to a business account from a personal account.
+                if ex.data["error"] and ex.data["error"]["error_subcode"] == 2108006:
+                    return medias
+                else:
+                    raise PyFacebookException(ErrorMessage(
+                        code=ex.code,
+                        message=ex.message,
+                    ))
             data = data.get('data', [])
             for item in data:
                 begin_flag, end_flag = True, True
