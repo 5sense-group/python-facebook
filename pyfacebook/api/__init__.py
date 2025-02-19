@@ -1,1 +1,1 @@
-from .graph import GraphAPI, BasicDisplayAPI, ThreadsGraphAPI, ServerSentEventAPI
+from .graph import GraphAPI, BasicDisplayAPI, ServerSentEventAPI

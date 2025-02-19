@@ -33,7 +33,6 @@ nav:
   - Usage:
       - Graph API: usage/graph-api.md
       - Server-Sent Events: usage/server-send-events.md
-      - Threads Graph API: usage/threads-graph-api.md
   - Changelog: CHANGELOG.md
   - Previous Version Docs:
       - README: previous-version/readme.md
